@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Giới Thiệu - Trường THPT Phan Châu Trinh</title>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    /* Định nghĩa biến màu */
+    :root {
+      --primary-color: #ff4d00;
+      --secondary-color: #ff8000;
+      --background-color: #fff8e1;
+      --text-color: #222;
+      --white: #ffffff;
+      --shadow-color: rgba(0, 0, 0, 0.15);
+    }
+    
+    /* Reset cơ bản */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background-color: var(--background-color);
+      color: var(--text-color);
+      line-height: 1.6;
+      scroll-behavior: smooth;
+    }
+    
+    /* Container dùng chung */
+    .container {
+      width: 90%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px 0;
+    }
+    
+    /* Header */
+    .header {
+      background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+      color: var(--white);
+      padding: 15px 0;
+      box-shadow: 0 4px 15px var(--shadow-color);
+      position: fixed;
+      width: 100%;
+      z-index: 1000;
+      top: 0;
+    }
+    .header-container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .logo {
+      font-size: 28px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      cursor: pointer;
+    }
+    nav ul {
+      list-style: none;
+      display: flex;
+    }
+    nav ul li { margin-left: 20px; }
+    nav ul li a {
+      color: var(--white);
+      text-decoration: none;
+      font-weight: 600;
+      padding: 10px 15px;
+      border-radius: 5px;
+      transition: background 0.3s ease, transform 0.3s ease;
+    }
+    nav ul li a:hover,
+    nav ul li a.active {
+      background: rgba(255, 255, 255, 0.3);
+      transform: translateY(-3px);
+    }
+    
+    /* Banner riêng cho Giới thiệu */
+    .banner {
+      background: url('https://tuthuc.edu.vn/wp-content/uploads/truong-trung-hoc-phan-chau-trinh.jpg') no-repeat center center/cover;
+      height: 300px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      margin-top: 80px; /* Bù cho header cố định */
+    }
+    .banner .overlay {
+      background: rgba(0, 0, 0, 0.5);
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: var(--white);
+      animation: fadeIn 2s ease-in;
+    }
+    .banner h2 {
+      font-size: 32px;
+      text-shadow: 2px 2px 6px rgba(0,0,0,0.5);
+      animation: slideIn 2s ease-out;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; } to { opacity: 1; }
+    }
+    @keyframes slideIn {
+      from { transform: translateY(20px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+    
+    /* Giới thiệu chính */
+    .intro {
+      background: var(--white);
+      padding: 40px;
+      margin: 40px 0;
+      border-radius: 10px;
+      box-shadow: 0 4px 15px var(--shadow-color);
+      text-align: center;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeInUp 1s forwards;
+      animation-delay: 0.5s;
+    }
+    @keyframes fadeInUp {
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .intro h3 {
+      font-size: 28px;
+      color: var(--primary-color);
+      margin-bottom: 20px;
+    }
+    .intro p {
+      font-size: 16px;
+      margin-bottom: 30px;
+    }
+    
+    /* Faculty Cards */
+    .faculty {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+    }
+    .faculty-card {
+      background: var(--white);
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px var(--shadow-color);
+      text-align: center;
+      width: 280px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .faculty-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 6px 18px var(--shadow-color);
+    }
+    .faculty-card h4 {
+      font-size: 20px;
+      color: var(--secondary-color);
+      margin-bottom: 10px;
+    }
+    .faculty-card p {
+      font-size: 14px;
+      color: #555;
+    }
+    
+    /* Footer */
+    .footer {
+      background: var(--primary-color);
+      color: var(--white);
+      padding: 20px 0;
+      text-align: center;
+      box-shadow: 0 -4px 15px var(--shadow-color);
+      font-size: 14px;
+    }
+    
+    /* Scroll to Top Button */
+    .scroll-to-top {
+      position: fixed;
+      bottom: 40px;
+      right: 40px;
+      background: var(--primary-color);
+      color: var(--white);
+      padding: 10px 15px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s, visibility 0.3s;
+      z-index: 1001;
+    }
+    .scroll-to-top.show {
+      opacity: 1;
+      visibility: visible;
+    }
+    
+    /* Responsive */
+    @media (max-width: 768px) {
+      .header-container { flex-direction: column; }
+      nav ul { flex-wrap: wrap; justify-content: center; }
+      .banner h2 { font-size: 24px; }
+      .faculty { flex-direction: column; align-items: center; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <div class="container header-container">
+      <h1 class="logo" onclick="scrollToTop()">Trường THPT Phan Châu Trinh</h1>
+      <nav>
+        <ul>
+          <li><a href="index.html">Trang chủ</a></li>
+          <li><a href="gioithieu.html" class="active">Giới thiệu</a></li>
+          <li><a href="tintuc.html">Tin tức</a></li>
+          <li><a href="lienhe.html">Liên hệ</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+  
+  <!-- Banner -->
+  <section class="banner">
+    <div class="overlay">
+      <h2>Giới thiệu Trường THPT Phan Châu Trinh</h2>
+    </div>
+  </section>
+  
+  <!-- Nội dung chính -->
+  <main class="container">
+    <!-- Giới thiệu -->
+    <section class="intro">
+      <h3>Giới thiệu về trường</h3>
+      <p>Trường THPT Phan Châu Trinh tự hào là một trong những trường hàng đầu với chương trình giảng dạy hiện đại, đội ngũ giáo viên tâm huyết và môi trường học tập sáng tạo. Chúng tôi cam kết đem đến chất lượng giáo dục tốt nhất cho học sinh.</p>
+      <div class="faculty">
+        <div class="faculty-card">
+          <img src="imaaaa/R.png" alt="Hiệu trưởng" width="60%" class="faculty-img">
+          <h4>Thầy Trần Trương Thiên Đức</h4>
+          <p>Hiệu trưởng</p>
+        </div>
+        <div class="faculty-card">
+          <img src="imaaaa/image.png" alt="Phó Hiệu trưởng" width="60%" class="faculty-img">
+          <h4>Cô Trần Trương B</h4>
+          <p>Phó Hiệu trưởng</p>
+        </div>
+        <div class="faculty-card">
+          <img src="imaaaa/kk.png" alt="Phó Hiệu trưởng" width="60%" class="faculty-img">
+          <h4>Cô Trần Trương C</h4>
+          <p>Hiệu Phó</p>
+        </div>
+      </div>
+    </section>
+  </main>
+  
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; 2025 Trường THPT Phan Châu Trinh. All Rights Reserved.</p>
+    </div>
+  </footer>
+  
+  <!-- Scroll to Top Button -->
+  <button class="scroll-to-top" onclick="scrollToTop()">Top</button>
+  
+  <!-- JavaScript tích hợp -->
+  <script>
+    // Hàm cuộn lên đầu trang
+    function scrollToTop() {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+    
+    // Hiển thị nút Scroll to Top khi cuộn trang
+    window.addEventListener('scroll', function() {
+      const scrollBtn = document.querySelector('.scroll-to-top');
+      if (window.pageYOffset > 300) {
+        scrollBtn.classList.add('show');
+      } else {
+        scrollBtn.classList.remove('show');
+      }
+    });
+    
+    // Thông báo chào mừng khi truy cập trang
+    document.addEventListener("DOMContentLoaded", function() {
+      alert("Chào mừng bạn đến với trang Giới Thiệu của Trường THPT Phan Châu Trinh!");
+    });
+  </script>
+</body>
+</html>

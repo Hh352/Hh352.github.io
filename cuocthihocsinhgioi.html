@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cuộc Thi Học Sinh Giỏi - Trường THPT Phan Châu Trinh</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    /* Định nghĩa biến màu */
+    :root {
+      --primary-color: #ff4d00;
+      --secondary-color: #ff8000;
+      --background-color: #fff8e1;
+      --text-color: #222;
+      --white: #ffffff;
+      --shadow-color: rgba(0, 0, 0, 0.15);
+    }
+    /* Reset & cơ bản */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background-color: var(--background-color);
+      color: var(--text-color);
+      line-height: 1.6;
+      scroll-behavior: smooth;
+    }
+    /* Header với liên kết Trang Chủ đẹp */
+    .header {
+      background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+      padding: 15px 20px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    }
+    .header-container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .header-title {
+      font-size: 26px;
+      font-weight: bold;
+      color: var(--white);
+    }
+    .btn-home {
+      padding: 8px 16px;
+      background: var(--secondary-color);
+      color: var(--white);
+      text-decoration: none;
+      border-radius: 5px;
+      font-weight: bold;
+      transition: background 0.3s ease;
+    }
+    .btn-home:hover {
+      background: var(--primary-color);
+    }
+    /* Banner */
+    .banner {
+      background: url('cuocthi.jpg') no-repeat center center/cover;
+      height: 300px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--white);
+      font-size: 32px;
+      text-shadow: 2px 2px 6px rgba(0,0,0,0.5);
+      position: relative;
+    }
+    /* Main Container */
+    .container {
+      width: 90%;
+      max-width: 1200px;
+      margin: 30px auto;
+      text-align: center;
+    }
+    /* Content card với hiệu ứng fade in */
+    .content {
+      background: var(--white);
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+    .content.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    /* Gallery */
+    .gallery {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
+      margin-top: 20px;
+    }
+    .gallery img {
+      width: 250px;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .gallery img:hover {
+      transform: scale(1.1);
+      box-shadow: 0 6px 16px rgba(0,0,0,0.3);
+    }
+    /* Button Xem thêm */
+    .btn-show-more {
+      background: var(--secondary-color);
+      color: var(--white);
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: background 0.3s ease;
+      margin-top: 20px;
+    }
+    .btn-show-more:hover {
+      background: var(--primary-color);
+    }
+    .hidden { display: none; }
+    /* Footer */
+    .footer {
+      background: var(--primary-color);
+      color: var(--white);
+      text-align: center;
+      padding: 15px;
+      margin-top: 30px;
+      box-shadow: 0 -4px 10px rgba(0,0,0,0.2);
+    }
+    /* Overlay cho Zoom ảnh */
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.7);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      visibility: hidden;
+      opacity: 0;
+      transition: opacity 0.3s ease, visibility 0.3s ease;
+    }
+    .overlay img {
+      max-width: 80%;
+      max-height: 80%;
+      border-radius: 10px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.5);
+    }
+    .overlay.show {
+      visibility: visible;
+      opacity: 1;
+    }
+    /* Back-to-Top Button */
+    .back-to-top {
+      position: fixed;
+      bottom: 40px;
+      right: 40px;
+      background: var(--secondary-color);
+      color: var(--white);
+      padding: 10px 15px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background 0.3s ease, opacity 0.3s ease;
+      opacity: 0;
+      visibility: hidden;
+      z-index: 1000;
+    }
+    .back-to-top.show {
+      opacity: 1;
+      visibility: visible;
+    }
+  </style>
+</head>
+<body>
+  <!-- Header với liên kết Trang Chủ bên trái và tiêu đề bên phải -->
+  <header class="header">
+    <div class="header-container">
+      <a href="ASM1.html" class="btn-home">Trang Chủ</a>
+      <span class="header-title">Cuộc Thi Học Sinh Giỏi</span>
+    </div>
+  </header>
+  
+  <section class="banner">Nơi Tài Năng Hội Tụ</section>
+  
+  <main class="container">
+    <div class="content" id="content">
+      <h2>Về Cuộc Thi</h2>
+      <p>Cuộc thi học sinh giỏi là sân chơi trí tuệ dành cho những học sinh xuất sắc, giúp các em phát triển tư duy và sáng tạo.</p>
+      <div class="gallery">
+        <img src="imaaaa/Screenshot 2025-03-28 055843.png" alt="Thí sinh làm bài">
+        <img src="imaaaa/Screenshot 2025-03-28 060223.png" alt="Lễ vinh danh">
+        <!-- Có thể thêm các ảnh khác, dùng class 'more' nếu cần ẩn/hiện thêm -->
+      </div>
+      <button class="btn-show-more">Xem thêm</button>
+    </div>
+  </main>
+  
+  <footer class="footer">&copy; 2025 Trường THPT Phan Châu Trinh</footer>
+  
+  <div class="overlay" id="overlay">
+    <img src="" id="overlayImg" alt="Zoom Image">
+  </div>
+  
+  <button class="back-to-top" id="backToTop">Top</button>
+  
+  <script>
+    // Xử lý nút "Xem thêm" (ẩn/hiện ảnh có class 'more')
+    const btnShowMore = document.querySelector('.btn-show-more');
+    btnShowMore.addEventListener('click', () => {
+      document.querySelectorAll('.more').forEach(img => img.classList.toggle('hidden'));
+      btnShowMore.textContent = btnShowMore.textContent === 'Xem thêm' ? 'Thu gọn' : 'Xem thêm';
+    });
+    
+    // Xử lý zoom ảnh khi nhấn vào ảnh trong gallery
+    const galleryImages = document.querySelectorAll('.gallery img');
+    const overlay = document.getElementById('overlay');
+    const overlayImg = document.getElementById('overlayImg');
+    galleryImages.forEach(img => {
+      img.addEventListener('click', () => {
+        overlayImg.src = img.src;
+        overlay.classList.add('show');
+      });
+    });
+    overlay.addEventListener('click', () => {
+      overlay.classList.remove('show');
+    });
+    
+    // Back-to-Top Button
+    const backToTop = document.getElementById('backToTop');
+    window.addEventListener('scroll', () => {
+      if (window.pageYOffset > 300) {
+        backToTop.classList.add('show');
+      } else {
+        backToTop.classList.remove('show');
+      }
+    });
+    backToTop.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+    
+    // Sử dụng IntersectionObserver để thêm hiệu ứng fade in cho nội dung
+    const content = document.getElementById('content');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.5 });
+    observer.observe(content);
+  </script>
+</body>
+</html>

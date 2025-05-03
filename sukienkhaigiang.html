@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sự kiện Khai Giảng</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #ff5733;
+            color: white;
+            padding: 20px;
+        }
+
+        main {
+            width: 80%;
+            margin: 20px auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        h2 {
+            color: #ff5733;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            background: #f9f9f9;
+            margin: 5px 0;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        #countdown {
+            font-size: 1.5em;
+            color: #d9534f;
+            font-weight: bold;
+        }
+
+        /* Nút quay lại trang chủ */
+        .back-home {
+            display: inline-block;
+            margin: 15px auto;
+            padding: 10px 15px;
+            background-color: #ff5733;
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 5px;
+        }
+
+        .back-home:hover {
+            background-color: #d9534f;
+        }
+
+    </style>
+</head>
+<body>
+
+    <a href="ASM1.html" class="back-home">⬅ Quay Lại Trang Chủ</a>
+
+    <header>
+        <h1>Chào mừng đến với Lễ Khai Giảng!</h1>
+    </header>
+
+    <main>
+        <section id="event-info">
+            <h2>📅 Thời gian & Địa điểm</h2>
+            <p><strong>⏰ Thời gian:</strong> 07:30 - 10:00, ngày 05/09/2026</p>
+            <p><strong>📍 Địa điểm:</strong> Trường THPT Phan Châu Trinh, Hội trường lớn</p>
+        </section>
+
+        <section id="schedule">
+            <h2>📜 Chương trình sự kiện</h2>
+            <ul>
+                <li>07:30 - 08:00: Đón tiếp đại biểu, học sinh & phụ huynh</li>
+                <li>08:00 - 08:30: Nghi thức chào cờ & phát biểu khai mạc</li>
+                <li>08:30 - 09:00: Văn nghệ chào mừng</li>
+                <li>09:00 - 09:30: Trao thưởng & phát biểu của học sinh</li>
+                <li>09:30 - 10:00: Kết thúc chương trình & chụp ảnh lưu niệm</li>
+            </ul>
+        </section>
+
+        <section id="countdown">
+            <h2>⏳ Đếm ngược đến ngày khai giảng</h2>
+            <p id="timer"></p>
+        </section>
+    </main>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            function updateCountdown() {
+                const eventDate = new Date("2026-09-05T07:30:00").getTime(); // Cập nhật đúng năm 2026
+                const now = new Date().getTime();
+                const timeLeft = eventDate - now;
+                const timerElement = document.getElementById("timer");
+
+                if (!timerElement) return;
+
+                if (timeLeft > 0) {
+                    const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+                    const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                    const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+                    const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+
+                    timerElement.innerHTML =
+                        `<strong>${days}</strong> ngày <strong>${hours}</strong> giờ <strong>${minutes}</strong> phút <strong>${seconds}</strong> giây`;
+                } else {
+                    timerElement.textContent = "🎉 Sự kiện đã diễn ra!";
+                    clearInterval(countdownInterval);
+                }
+            }
+
+            updateCountdown(); // Chạy ngay khi tải trang
+            const countdownInterval = setInterval(updateCountdown, 1000);
+        });
+    </script>
+
+
+    <script></script>
+</body>
+</html>
